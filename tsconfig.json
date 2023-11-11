@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "lib/esm",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "target": "es6",
     "lib": [
       "es6",
@@ -24,11 +25,6 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "lib"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "dist", "storybook-static"]
 }
