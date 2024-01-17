@@ -1,38 +1,39 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState} from 'react';
 
-export interface DarkModeContextProps {
-    isDarkMode: boolean;
-    toggleDarkMode: () => void;
-}
+type ThemeContextProviderProps = {
+    children: React.ReactNode;
+};
 
-let DarkModeContext = createContext<DarkModeContextProps>({
-    isDarkMode: false,
-    toggleDarkMode: () => {},
-});
+type Theme = 'light' | 'dark';
 
-export interface DarkModeProviderProps {
-    children: React.ReactNode | React.ReactNode[];
-    isDarkMode?: boolean;
-}
+type ThemeContext = {
+    theme: Theme;
+    setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+};
 
-export const DarkModeProvider: React.FC<DarkModeProviderProps> = ({ children, isDarkMode = true }) => {
+export const ThemeContext = createContext<ThemeContext | null>(null);
 
-    const [darkMode, setDarkMode] = useState<boolean>(isDarkMode);
-    const toggleDarkMode = useCallback(() => {
-        setDarkMode((prev) => !prev);
-    }, []);
+export default function ThemeContextProvider({ children }: ThemeContextProviderProps) {
+
+    const [theme, setTheme] = useState<Theme>('light');
 
     return (
-        <DarkModeContext.Provider value={{ isDarkMode: darkMode, toggleDarkMode: toggleDarkMode }}>
+        <ThemeContext.Provider 
+        value={{
+            theme, 
+            setTheme
+        }}
+        >
             {children}
-        </DarkModeContext.Provider>
+        </ThemeContext.Provider>
     );
 };
 
-export const useDarkMode = (): DarkModeContextProps  => {
-  const context = useContext(DarkModeContext);
-  if (!context) {
-    throw new Error('useDarkMode must be used within a DarkModeProvider. Wrap your component with DarkModeProvider.');
-  }
-  return context;
-};
+
+export function useThemeContext() {
+    const context = useContext(ThemeContext);
+    if (!context) {
+        throw new Error('useThemeContext must be used within a ThemeContextProvider');
+    }
+    return context;
+}

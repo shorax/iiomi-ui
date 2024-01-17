@@ -1,24 +1,27 @@
 import React from 'react';
 import { Button } from '../components';
-import { DarkModeProvider, useDarkMode } from '../contexts/DarkModecontext';
+import ThemeContextProvider, { useThemeContext } from '../contexts/DarkModeContext';
 
 export default {
-    title: 'DarkModeContext',
-    component: DarkModeProvider,
+    title: 'ThemeContext',
+    component: ThemeContextProvider,
 };
 
-export const DarkModeProviderComponent = () => {
-    const { isDarkMode, toggleDarkMode } = useDarkMode();
+export const ThemeContextProviderComponent = () => {
+
+    const {theme, setTheme} = useThemeContext();
 
     return (
-        <DarkModeProvider>
+        <ThemeContextProvider>
+        <ThemeContextProvider>
             <div>
-                <p>{isDarkMode ? 'Dark Mode' : 'Light Mode'}</p>
+                <p>{theme ? 'Dark Mode' : 'Light Mode'}</p>
                 <Button
-                    label={`Toggle Dark Mode (currently ${isDarkMode ? 'Dark' : 'Light'})`}
-                    onClick={toggleDarkMode}
+                    label={`Toggle Dark Mode (currently ${theme})`}
+                    onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
                 />
             </div>
-        </DarkModeProvider>
+        </ThemeContextProvider>
+        </ThemeContextProvider>
     );
 };

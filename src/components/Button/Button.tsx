@@ -1,7 +1,6 @@
 import React from 'react';
 import { mergeClassNames } from '../../helpers/domHelpers';
 import { componentNames } from './useNames';
-import { useDarkMode } from '../../contexts/DarkModecontext';
 
 export interface ButtonProps {
   label: string;
@@ -12,12 +11,12 @@ export interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ label, onClick, isPrimary, isDisabled }) => {
 
-  const { isDarkMode } = useDarkMode();
+  //const { isDarkMode } = useDarkMode();
 
   const rootClassName = mergeClassNames(componentNames.button.root, {
     primary: isPrimary,
     disabled: isDisabled,
-    darkMode: isDarkMode,
+    //darkMode: isDarkMode,
   });
 
   return (
