@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState} from 'react';
+import storageHelpers from '../helpers/storageHelpers';
 
 type ThemeContextProviderProps = {
     children: React.ReactNode;
@@ -13,9 +14,9 @@ type ThemeContext = {
 
 export const ThemeContext = createContext<ThemeContext | null>(null);
 
-export default function ThemeContextProvider({ children }: ThemeContextProviderProps) {
+export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
 
-    const [theme, setTheme] = useState<Theme>('light');
+    const [theme, setTheme] = useState<Theme>(storageHelpers.localStorage.getItem('theme') as Theme || 'light');
 
     return (
         <ThemeContext.Provider 
