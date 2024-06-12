@@ -1,22 +1,22 @@
-import React from 'react';
-import { Button } from '../components';
-import { ThemeContextProvider } from '../contexts';
-import storageHelpers from '../helpers/storageHelpers';
+import { StoryObj, Meta } from '@storybook/react';
+import Button from '../components/Button/Button';
 
-export default {
-  title: 'Button',
-  component: Button,
+const meta: Meta<typeof Button> = {
+	title: 'Components/Button',
+	component: Button,
 };
 
-export const Basic = () => {
-  storageHelpers.localStorage.setItem('theme', 'light');
-  return ( <Button id={'FOO'} label="Click me" onClick={() => alert('Button clicked')} />)};
-export const DarkModeButton = () => {
-  storageHelpers.localStorage.setItem('theme', 'dark');
-  return (
-    <ThemeContextProvider>
-      <Button id={'FOO'} label="Click me" onClick={() => alert('Button clicked')} />
-    </ThemeContextProvider>
-  )
-};
+export default meta;
 
+type Story = StoryObj<typeof Button>;
+
+export const ButtonPrimaryStory: Story = {
+	args: {
+		id: 'button',
+		variant: 'primary',
+		title: 'Button',
+		children: 'Primary Button',
+		size: 'medium',
+		disabled: false,
+	}
+};

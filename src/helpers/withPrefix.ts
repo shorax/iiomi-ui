@@ -1,9 +1,9 @@
-import prefixHelpers from "./prefixHelpers";
+import prefixHelpers from './prefixHelpers';
 
 export function allWithPrefix<T>(classNames: {[className in keyof T]: string}) {
-    return prefixHelpers.allWithPrefix(('iui' + '-'), classNames);
+	return prefixHelpers.allWithPrefix(('iui' + '-'), classNames);
 }
 
 export function withPrefix(className: string) {
-    return prefixHelpers.withPrefix(('iui' + '-'), className);
+	return prefixHelpers.withPrefix(('iui' + '-'), className);
 }
